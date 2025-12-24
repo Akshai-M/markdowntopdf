@@ -3,7 +3,7 @@ import "./globals.css";
 
 
 export const metadata: Metadata = {
-  title: "mdtopdf",
+  title: "markdowntopdf",
   description: "Convert your Markdown files to PDF easily.",
 };
 
