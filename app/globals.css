@@ -1,26 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap');
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 220 20% 97%;
+    --foreground: 220 25% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 10%;
+
+    --primary: 25 95% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 15% 92%;
+    --secondary-foreground: 220 25% 20%;
+
+    --muted: 220 15% 94%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 25 90% 95%;
+    --accent-foreground: 25 95% 40%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 25 95% 53%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --prose-heading: 220 30% 15%;
+    --prose-body: 220 15% 30%;
+    --prose-link: 25 95% 50%;
+    --prose-code-bg: 220 20% 94%;
+    --prose-code-text: 25 80% 45%;
+    --prose-blockquote-border: 25 95% 53%;
+    --prose-blockquote-bg: 25 90% 97%;
+    --prose-table-border: 220 15% 85%;
+    --prose-table-header: 220 20% 95%;
+
+    --editor-bg: 220 15% 98%;
+    --editor-border: 220 15% 90%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222 25% 8%;
+    --foreground: 220 15% 92%;
+
+    --card: 222 25% 11%;
+    --card-foreground: 220 15% 92%;
+
+    --popover: 222 25% 11%;
+    --popover-foreground: 220 15% 92%;
+
+    --primary: 25 95% 55%;
+    --primary-foreground: 222 25% 8%;
+
+    --secondary: 222 20% 16%;
+    --secondary-foreground: 220 15% 85%;
+
+    --muted: 222 20% 14%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 25 40% 15%;
+    --accent-foreground: 25 95% 70%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 222 20% 18%;
+    --input: 222 20% 18%;
+    --ring: 25 95% 55%;
+
+    /* Custom tokens dark */
+    --prose-heading: 220 15% 95%;
+    --prose-body: 220 10% 75%;
+    --prose-link: 25 95% 60%;
+    --prose-code-bg: 222 25% 14%;
+    --prose-code-text: 25 80% 65%;
+    --prose-blockquote-border: 25 95% 55%;
+    --prose-blockquote-bg: 25 30% 12%;
+    --prose-table-border: 222 20% 22%;
+    --prose-table-header: 222 25% 14%;
+
+    --editor-bg: 222 25% 10%;
+    --editor-border: 222 20% 16%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Outfit', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@media print {
+  /* Print-only: show the rendered preview cleanly and let the browser paginate text naturally. */
+  body.print-preview-only {
+    background: hsl(0 0% 100%);
+    color: hsl(0 0% 0%);
+  }
+
+  body.print-preview-only header {
+    display: none !important;
+  }
+
+  body.print-preview-only main {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Hide editor column; keep only the preview column */
+  body.print-preview-only main > div {
+    display: block !important;
+    height: auto !important;
+  }
+
+  body.print-preview-only main > div > :first-child {
+    display: none !important;
+  }
+
+  body.print-preview-only main > div > :last-child {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  body.print-preview-only main > div > :last-child > :first-child {
+    display: none !important;
+  }
+
+  body.print-preview-only main > div > :last-child > :last-child {
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Improve wrapping and page-break behavior for long documents */
+  body.print-preview-only * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  body.print-preview-only pre,
+  body.print-preview-only code {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  body.print-preview-only p,
+  body.print-preview-only li,
+  body.print-preview-only h1,
+  body.print-preview-only h2,
+  body.print-preview-only h3,
+  body.print-preview-only h4,
+  body.print-preview-only h5,
+  body.print-preview-only h6,
+  body.print-preview-only blockquote,
+  body.print-preview-only table,
+  body.print-preview-only img {
+    break-inside: avoid-page;
+  }
+}
+
+@layer utilities {
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
 }
